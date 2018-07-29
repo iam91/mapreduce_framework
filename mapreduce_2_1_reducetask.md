@@ -1,5 +1,4 @@
 # ReduceTask的流程
-***
 
 ReduceTask reducer reduce之间的关系
 
@@ -13,7 +12,6 @@ ReduceTask reducer reduce之间的关系
 
 ***
 ### ReduceTask中的流程
-***
 
 ```java
   在类初始化的时候，
@@ -41,7 +39,6 @@ ReduceTask reducer reduce之间的关系
 
 ***
 ### COPY Phase
-***
 ```java
     ReduceTask中的run方法部分代码
     boolean isLocal = "local".equals(job.get("mapred.job.tracker", "local"));
@@ -64,7 +61,6 @@ ReduceTask reducer reduce之间的关系
 
 ***
 ### SORT Phase
-***
 ```
 ReduceTask中的run方法
     final FileSystem rfs = FileSystem.getLocal(job).getRaw();
@@ -85,7 +81,6 @@ ReduceTask中的run方法
 
 ***
 ### Reducer运行的核心逻辑
-***
 ```java
     public void run(Context context) throws IOException, InterruptedException {
         setup(context);
