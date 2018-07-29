@@ -1,8 +1,5 @@
-#Copy Phase
-***
-
-###概述COPY Phase
-***
+# Copy Phase
+### 概述COPY Phase
 
 这个是获取map结果输出的过程，然后交给reduce去处理。
 
@@ -15,8 +12,8 @@
 * LocalFSMerger
 
 ***
-###几个方面之间的关系
-***
+### 几个方面之间的关系
+
 ![CopyPhase](_image/4.1.CopyPhase.png)
 
 * fetchOutputs
@@ -34,18 +31,16 @@
  * 文件较多的时候，将硬盘中的文件merge，减少文件个数
 
 ***
-###map结果的分类记录实际关系
-***
+### map结果的分类记录实际关系
 
 map结果分类记录和各个线程之间的关系还是很复杂的。
 
 ![CopyPhaseRecords](_image/4.2.CopyPhaseRecords.png)
 
 ***
-###分析每个部分
-***
-#####fetchOutputs
-#####GetMapEventThread
+### 分析每个部分
+#### fetchOutputs
+#### GetMapEventThread
 ```
     public void run() {        
         do {
@@ -61,7 +56,7 @@ map结果分类记录和各个线程之间的关系还是很复杂的。
         // 3. 将TIPFAILED的maps从neededOutputs移除，因为根本不需要这些数据
    }
 ```
-#####MapOutputCopier
+#### MapOutputCopier
 
 * 使用copyOutput方法来从其他机器上将数据复制过来
  * 根据一些记录来调用getMapOutput将文件复制过来
@@ -74,14 +69,14 @@ map结果分类记录和各个线程之间的关系还是很复杂的。
  * MapOutput为实际上每个内存中文件的存储对象
 * 存入硬盘的文件由mapOutputFilesOnDisk索引
 
-#####LocalFSMerger
+#### LocalFSMerger
 ![Merge合并硬盘中的文件](_image/5.1.Merge.png)
 
 * 这里和Map端合并溢写文件基本类似
 * 这个就是普通的merge过程
 * 之后会有对Merger的详细分析
 
-#####InMemFSMergeThread
+#### InMemFSMergeThread
 ![将内存中的数据变成Segment](_image/5.2.InMemFSMergeThread.png)
 
 * 图中就是如何将内存中存储的文件(MapOutput对象)变成Segment对象
